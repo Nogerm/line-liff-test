@@ -77,10 +77,19 @@
       <label>要傳送的訊息:</label>
       <input class="form-control" type="text" id="msg" value="測試" /><br />
       <button class="btn btn-primary" id="ButtonSendMsg">要傳送的訊息</button>
-      <form id="form_img1" runat="server">
-        <input type='file' id="imgInput" />
-        <img id="blah" src="#" alt="未選擇圖片" style="width:90vw"/>
-      </form>
+      <table border="1" style="width:96vw;margin-left:2vw">
+        <tr>
+          <td colspan="2">圖片訊息</td>
+        </tr>
+        <tr>
+          <td style="width:60vw">
+            <img id="blah" src="#" alt="未選擇圖片" style="width:60vw"/>
+          </td>
+          <td>
+            <input type='file' id="imgInput" />
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 </body>

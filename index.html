@@ -50,6 +50,35 @@
                    alert('done');
                })
             });
+            //ButtonAddImageMap
+            $('#ButtonAddImagemap').click(function () {
+              $.ajax({
+                url: 'https://nogerm-demo-test.herokuapp.com/imagemap',
+                type: 'post',
+                data: {
+                  url: $('#imagemapLink').val(),
+                  data: getBase64Image(document.getElementById("blah"))
+                },
+                headers: {
+                    UserId: $('#userid').val()
+                },
+                dataType: 'json',
+                success: function (data) {
+                  console.info("success");
+                }
+              });
+            });
+            //Convert image
+            function getBase64Image(img) {
+              var canvas = document.createElement("canvas");
+              canvas.width = img.width;
+              canvas.height = img.height;
+              var ctx = canvas.getContext("2d");
+              ctx.drawImage(img, 0, 0);
+              var dataURL = canvas.toDataURL("image/jpg");
+              return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+            }
+            //Read image
             function readURL(input) {
               if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -59,7 +88,7 @@
                 reader.readAsDataURL(input.files[0]);
               }
             }
-            $("#imgInput").change(function() {
+            $("#imgInput1").change(function() {
               readURL(this);
             });
         });
@@ -80,7 +109,12 @@
       <button class="btn btn-primary" id="ButtonSendMsg">要傳送的訊息</button>
       <table border="1" style="width:96vw;margin-left:2vw">
         <tr>
-          <td colspan="2">圖片訊息</td>
+          <td colspan="2">新增圖文訊息</td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input class="form-control" type="text" id="imagemapLink" placeholder="請貼上圖文訊息的連結" />
+          </td>
         </tr>
         <tr>
           <td style="width:60vw">
@@ -88,9 +122,14 @@
           </td>
           <td style="width:36vw">
             <label class="btn btn-primary">
-              <input type='file' accept=".png, .jpg, .jpeg" id="imgInput" style="display:none">
+              <input type='file' accept=".png, .jpg, .jpeg" id="imgInput1" style="display:none">
               <ion-icon name="image"></ion-icon> 上傳圖片
             </label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <button class="btn btn-primary" id="ButtonAddImagemap">確定新增訊息</button>
           </td>
         </tr>
       </table>

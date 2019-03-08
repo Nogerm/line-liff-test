@@ -79,7 +79,8 @@
               var ctx = canvas.getContext("2d");
               ctx.drawImage(img, 0, 0);
               var dataURL = canvas.toDataURL("image/jpg");
-              return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+              return dataURL;
+              //return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
             }
             //Read image
             function readURL(input) {

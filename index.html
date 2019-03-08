@@ -52,17 +52,20 @@
             });
             //ButtonAddImageMap
             $('#ButtonAddImagemap').click(function () {
+              dataObj = {
+                url: "123",
+                data: "456"
+              }
+
               $.ajax({
                 url: 'https://nogerm-demo-test.herokuapp.com/imagemap',
                 type: 'post',
-                data: {
-                  url: "123",
-                  data: "456"
-                },
                 headers: {
                     UserId: "789"
                 },
+                contentType: "application/json; charset=utf-8",
                 dataType: 'json',
+                data: JSON.stringify(dataObj),
                 success: function (data) {
                   console.info("success");
                 }

@@ -53,15 +53,15 @@
             //ButtonAddImageMap
             $('#ButtonAddImagemap').click(function () {
               dataObj = {
-                url: "123",
-                data: "456"
+                url: $('#imagemapLink').val(),
+                data: getBase64Image(document.getElementById("blah"))
               }
 
               $.ajax({
                 url: 'https://nogerm-demo-test.herokuapp.com/imagemap',
                 type: 'post',
                 headers: {
-                    UserId: "789"
+                  UserId: $('#userid').val()
                 },
                 contentType: "application/json; charset=utf-8",
                 dataType: 'json',

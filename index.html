@@ -26,6 +26,9 @@
             liff.init(function (data) {
                 initializeApp(data);
             });
+            let base64Str = "";
+            let origin_width = 0;
+            let origin_height = 0;
             //ButtonGetProfile
             $('#ButtonGetProfile').click(function () {
                 //取得User Proile
@@ -54,7 +57,7 @@
             $('#ButtonAddImagemap').click(function () {
               dataObj = {
                 url: $('#imagemapLink').val(),
-                data: getBase64Image(document.getElementById("blah"))
+                data: getBase64Image(document.getElementById('blah'))
               }
 
               $.ajax({
@@ -73,20 +76,28 @@
             });
             //Convert image
             function getBase64Image(img) {
-              var canvas = document.createElement("canvas");
-              canvas.width = img.width;
-              canvas.height = img.height;
-              var ctx = canvas.getContext("2d");
+              console.info("height:"+img.height+"\nwidth:"+img.width);
+              let canvas = document.createElement("canvas");
+              canvas.width = origin_width;
+              canvas.height = origin_height;
+              const ctx = canvas.getContext("2d");
               ctx.drawImage(img, 0, 0);
-              var dataURL = canvas.toDataURL("image/jpg");
+              const dataURL = canvas.toDataURL("image/jpg");
               return dataURL;
               //return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
             }
             //Read image
             function readURL(input) {
               if (input.files && input.files[0]) {
-                var reader = new FileReader();
+                const reader = new FileReader();
                 reader.onload = function(e) {
+                  const image = new Image();
+                  image.src = e.target.result;
+                  image.onload = function() {
+                      // access image size here
+                      origin_width = this.width;
+                      origin_height = this.height;
+                  };
                   $('#blah').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
